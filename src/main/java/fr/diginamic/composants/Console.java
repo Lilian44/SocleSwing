@@ -31,7 +31,7 @@ import fr.diginamic.composants.ui.Input;
 import fr.diginamic.composants.validator.FormValidator;
 
 /**
- * Classe qui propose quelques mÃ©thodes pour construire des composants
+ * Classe qui propose quelques méthodes pour construire des composants
  * graphiques
  * 
  * @author RichardBONNAMY
@@ -40,7 +40,7 @@ import fr.diginamic.composants.validator.FormValidator;
 public class Console {
 
 	/**
-	 * FONT_18 : police par dÃ©faut utilisÃ©e pour la construction de tous les
+	 * FONT_18 : police par défaut utilisée pour la construction de tous les
 	 * composants graphiques
 	 */
 	public static final Font FONT_10 = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
@@ -49,7 +49,7 @@ public class Console {
 	public static final Font FONT_16 = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 	public static final Font FONT_18 = new Font(Font.SANS_SERIF, Font.PLAIN, 18);
 	/**
-	 * dimension : classe qui fournit des informations sur l'Ã©cran du PC utilisÃ©
+	 * dimension : classe qui fournit des informations sur l'écran du PC utilisé
 	 * et notamment ses dimensions. Cette classe intervient dans le calcul de
 	 * centrage des composants graphiques
 	 */
@@ -69,9 +69,9 @@ public class Console {
 	}
 
 	/**
-	 * MÃ©thode utilitaire qui permet de calculer l'abscisse (X) idÃ©ale d'un
-	 * composant graphique pour que celui-ci soit centrÃ© par rapport Ã  l'Ã©cran de
-	 * l'ordinateur utilisÃ©.
+	 * Méthode utilitaire qui permet de calculer l'abscisse (X) idéale d'un
+	 * composant graphique pour que celui-ci soit centré par rapport à l'écran de
+	 * l'ordinateur utilisé.
 	 * 
 	 * @param component composant
 	 * @return int
@@ -81,9 +81,9 @@ public class Console {
 	}
 
 	/**
-	 * MÃ©thode utilitaire qui permet de calculer l'ordonnÃ©e (Y) idÃ©ale d'un
-	 * composant graphique pour que celui-ci soit centrÃ© par rapport Ã  l'Ã©cran de
-	 * l'ordinateur utilisÃ©.
+	 * Méthode utilitaire qui permet de calculer l'ordonnée (Y) idéale d'un
+	 * composant graphique pour que celui-ci soit centré par rapport à l'écran de
+	 * l'ordinateur utilisé.
 	 * 
 	 * @param component composant
 	 * @return int
@@ -93,8 +93,8 @@ public class Console {
 	}
 
 	/** Permet d'activer un formulaire SWING.
-	 * La mÃ©thode est synchrone, c'est Ã  dire que la mÃ©thode ne rend la main que lorsque le
-	 * formateur a cliquÃ© sur Valider (return true) ou Annuler (return false).
+	 * La méthode est synchrone, c'est à dire que la méthode ne rend la main que lorsque le
+	 * formateur a cliqué sur Valider (return true) ou Annuler (return false).
 	 * 
 	 * @param titreFormulaire titre du formulaire
 	 * @param form formulaire
@@ -104,21 +104,21 @@ public class Console {
 
 		JFrame fenetreRecherche = new JFrame(titreFormulaire);
 
-		// Lorsqu'on ferme une fenÃªtre secondaire on ne souhaite pas arrÃªter
+		// Lorsqu'on ferme une fenêtre secondaire on ne souhaite pas arrêter
 		// l'application
 		// mais simplement la masquer.
 		fenetreRecherche.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		// Dans chaque fenÃªtre secondaire les composants graphiques seront positionnÃ©s
-		// en coordonnÃ©es x,y d'oÃ¹ la suppression du layout
+		// Dans chaque fenêtre secondaire les composants graphiques seront positionnés
+		// en coordonnées x,y d'où la suppression du layout
 		fenetreRecherche.getContentPane().setLayout(null);
 
-		// Par dÃ©faut les fenÃªtres secondaires ne sont pas visibles.
+		// Par défaut les fenêtres secondaires ne sont pas visibles.
 		fenetreRecherche.setVisible(false);
 
-		// On rÃ©alise une boucle sur le tableau de questions pour gÃ©nÃ©rer et
+		// On réalise une boucle sur le tableau de questions pour générer et
 		// positionner
-		// les divers Ã©lÃ©ments sur la fenÃªtre secondaire
+		// les divers éléments sur la fenêtre secondaire
 
 		Map<String, JComponent> fields = new HashMap<>();
 
@@ -128,10 +128,10 @@ public class Console {
 		int maxLabelWidth = 0;
 		for (Input input : form) {
 
-			// Nombre de carcatÃ¨res dans le texte de la question
+			// Nombre de carcatères dans le texte de la question
 			int nbCaracteres = input.getLabel().length();
 
-			// Largeur approximative en pixels du texte Ã  afficher
+			// Largeur approximative en pixels du texte à afficher
 			int largeurLabel = nbCaracteres * 10 + 100;
 
 			// Recherche du texte le plus large parmi tous les textes des questions
@@ -144,12 +144,12 @@ public class Console {
 		}
 
 		maxWidth = maxLabelWidth + maxInputWidth + 30;
-		// Calcul de son positionnement par dÃ©faut et de ses dimensions.
-		// La hauteur dÃ©pend notamment du nombre de questions qu'on a Ã  poser
-		// Ã  l'utilisateur
+		// Calcul de son positionnement par défaut et de ses dimensions.
+		// La hauteur dépend notamment du nombre de questions qu'on a à poser
+		// à l'utilisateur
 
 		fenetreRecherche.setBounds(100, 100, maxWidth, 110 + 40 * (form.size() - 1));
-		// Calcul des coordonnÃ©es x et y pour que la fenÃªtre secondaire soit centrÃ©e.
+		// Calcul des coordonnées x et y pour que la fenêtre secondaire soit centrée.
 		int x = Console.getX(fenetreRecherche);
 		int y = Console.getY(fenetreRecherche);
 		fenetreRecherche.setLocation(x, y);
@@ -158,7 +158,7 @@ public class Console {
 
 			Input input = form.getInputs().get(i);
 
-			// CrÃ©ation du label
+			// Création du label
 			JLabel label = new JLabel(input.getLabel());
 			label.setBounds(10, 18 + i * 30, maxLabelWidth, 20);
 			label.setFont(FONT_14);
@@ -178,7 +178,7 @@ public class Console {
 
 		}
 
-		// CrÃ©ation du bouton Valider
+		// Création du bouton Valider
 		
 		JButton annuler = new JButton("Annul.");
 		annuler.setBounds((maxWidth-170)/2, 40 + 40 * (form.size() - 1), 75, 25);
@@ -188,9 +188,9 @@ public class Console {
 		valider.setBounds((maxWidth-170)/2+95, 40 + 40 * (form.size() - 1), 75, 25);
 		valider.setBackground(new Color(0, 195, 255));
 		
-		// Lorsqu'on clique sur le bouton Valider on lance un systÃ¨me pour attendre la
+		// Lorsqu'on clique sur le bouton Valider on lance un système pour attendre la
 		// saisie
-		// par l'utilisateur de la valeur demandÃ©e.
+		// par l'utilisateur de la valeur demandée.
 		annuler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -203,9 +203,9 @@ public class Console {
 			}
 		});
 
-		// Lorsqu'on clique sur le bouton Valider on lance un systÃ¨me pour attendre la
+		// Lorsqu'on clique sur le bouton Valider on lance un système pour attendre la
 		// saisie
-		// par l'utilisateur de la valeur demandÃ©e.
+		// par l'utilisateur de la valeur demandée.
 		valider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -242,8 +242,8 @@ public class Console {
 	}
 	
 	/** Permet d'activer un formulaire SWING.
-	 * La mÃ©thode est synchrone, c'est Ã  dire que la mÃ©thode ne rend la main que lorsque le
-	 * formateur a cliquÃ© sur Valider (return true) ou Annuler (return false).
+	 * La méthode est synchrone, c'est à dire que la méthode ne rend la main que lorsque le
+	 * formateur a cliqué sur Valider (return true) ou Annuler (return false).
 	 * 
 	 * @param titreFenetre titre du formulaire
 	 * @param form formulaire
@@ -253,26 +253,26 @@ public class Console {
 
 		JFrame fenetreRecherche = new JFrame(titreFenetre);
 
-		// Lorsqu'on ferme une fenÃªtre secondaire on ne souhaite pas arrÃªter
+		// Lorsqu'on ferme une fenêtre secondaire on ne souhaite pas arrêter
 		// l'application
 		// mais simplement la masquer.
 		fenetreRecherche.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		// Dans chaque fenÃªtre secondaire les composants graphiques seront positionnÃ©s
-		// en coordonnÃ©es x,y d'oÃ¹ la suppression du layout
+		// Dans chaque fenêtre secondaire les composants graphiques seront positionnés
+		// en coordonnées x,y d'où la suppression du layout
 		fenetreRecherche.getContentPane().setLayout(null);
 
-		// Par dÃ©faut les fenÃªtres secondaires ne sont pas visibles.
+		// Par défaut les fenêtres secondaires ne sont pas visibles.
 		fenetreRecherche.setVisible(false);
 
 		int maxWidth = question.length() * 12;
 
-		// Calcul de son positionnement par dÃ©faut et de ses dimensions.
-		// La hauteur dÃ©pend notamment du nombre de questions qu'on a Ã  poser
-		// Ã  l'utilisateur
+		// Calcul de son positionnement par défaut et de ses dimensions.
+		// La hauteur dépend notamment du nombre de questions qu'on a à poser
+		// à l'utilisateur
 
 		fenetreRecherche.setBounds(100, 100, maxWidth, 120);
-		// Calcul des coordonnÃ©es x et y pour que la fenÃªtre secondaire soit centrÃ©e.
+		// Calcul des coordonnées x et y pour que la fenêtre secondaire soit centrée.
 		int x = Console.getX(fenetreRecherche);
 		int y = Console.getY(fenetreRecherche);
 		fenetreRecherche.setLocation(x, y);
@@ -282,7 +282,7 @@ public class Console {
 		label.setFont(FONT_14);
 		fenetreRecherche.add(label);
 
-		// CrÃ©ation du bouton Valider
+		// Création du bouton Valider
 		
 		JButton annuler = new JButton("Annul.");
 		annuler.setBounds((maxWidth-170)/2, 50, 75, 25);
@@ -292,9 +292,9 @@ public class Console {
 		valider.setBounds((maxWidth-170)/2+95, 50, 75, 25);
 		valider.setBackground(new Color(0, 195, 255));
 		
-		// Lorsqu'on clique sur le bouton Valider on lance un systÃ¨me pour attendre la
+		// Lorsqu'on clique sur le bouton Valider on lance un système pour attendre la
 		// saisie
-		// par l'utilisateur de la valeur demandÃ©e.
+		// par l'utilisateur de la valeur demandée.
 		annuler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -307,9 +307,9 @@ public class Console {
 			}
 		});
 
-		// Lorsqu'on clique sur le bouton Valider on lance un systÃ¨me pour attendre la
+		// Lorsqu'on clique sur le bouton Valider on lance un système pour attendre la
 		// saisie
-		// par l'utilisateur de la valeur demandÃ©e.
+		// par l'utilisateur de la valeur demandée.
 		valider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -340,8 +340,8 @@ public class Console {
 	}
 	
 	/** Permet d'activer un formulaire SWING.
-	 * La mÃ©thode est synchrone, c'est Ã  dire que la mÃ©thode ne rend la main que lorsque le
-	 * formateur a cliquÃ© sur Valider (return true) ou Annuler (return false).
+	 * La méthode est synchrone, c'est à dire que la méthode ne rend la main que lorsque le
+	 * formateur a cliqué sur Valider (return true) ou Annuler (return false).
 	 * 
 	 * @param titreFormulaire titre du formulaire
 	 * @param form formulaire
@@ -394,6 +394,11 @@ public class Console {
 		
 		String textModifie = text;
 		
+		boolean startWithTag = false;
+		if (text.startsWith("<")) {
+			startWithTag = true;
+		}
+		
 		// Si le texte contient des images, on modifie les sources
 		if (text.contains("img") && text.contains("src")) {
 			Document doc = Jsoup.parse(text);
@@ -408,7 +413,12 @@ public class Console {
 					}
 				}
 			}
-			textModifie = doc.body().children().toString();
+			if (startWithTag) {
+				textModifie = doc.body().children().toString() +" " + doc.body().ownText();
+			}
+			else {
+				textModifie = doc.body().ownText()+" "+doc.body().children().toString();
+			}
 		}
 		
 		contentpane.append(textModifie);
@@ -416,7 +426,7 @@ public class Console {
 		return this;
 	}
 
-	/** Affiche un texte HTML suivi d'un passage Ã  la ligne
+	/** Affiche un texte HTML suivi d'un passage à la ligne
 	 * @param text texte
 	 * @return Console.
 	 */
@@ -424,10 +434,10 @@ public class Console {
 		return print(text).print("<br>");
 	}
 
-	/** Affiche un texte avec une couleur donnÃ©e ainsi que des attributs css au format suivant:
-	 * propriÃ©tÃ©1: valeur1; propriÃ©tÃ©2: valeur2;
+	/** Affiche un texte avec une couleur donnée ainsi que des attributs css au format suivant:
+	 * propriété1: valeur1; propriété2: valeur2;
 	 * 
-	 * Le texte est ensuite suivi d'un passage Ã  la ligne
+	 * Le texte est ensuite suivi d'un passage à la ligne
 	 * 
 	 * @param text texte
 	 * @param attributes attributs CSS
@@ -437,8 +447,8 @@ public class Console {
 		return println(HtmlUtils.toSpan(text, attributes));
 	}
 	
-	/** Affiche un texte avec une couleur donnÃ©e ainsi que des attributs css au format suivant:
-	 * propriÃ©tÃ©1: valeur1; propriÃ©tÃ©2: valeur2;
+	/** Affiche un texte avec une couleur donnée ainsi que des attributs css au format suivant:
+	 * propriété1: valeur1; propriété2: valeur2;
 	 * 
 	 * @param text texte
 	 * @param c couleur
@@ -449,10 +459,10 @@ public class Console {
 		return print(HtmlUtils.toSpan(text, c, attributes));
 	}
 
-	/** Affiche un texte avec une couleur donnÃ©e ainsi que des attributs css au format suivant:
-	 * propriÃ©tÃ©1: valeur1; propriÃ©tÃ©2: valeur2;
+	/** Affiche un texte avec une couleur donnée ainsi que des attributs css au format suivant:
+	 * propriété1: valeur1; propriété2: valeur2;
 	 * 
-	 * Le texte est ensuite suivi d'un passage Ã  la ligne
+	 * Le texte est ensuite suivi d'un passage à la ligne
 	 * 
 	 * @param text texte
 	 * @param c couleur

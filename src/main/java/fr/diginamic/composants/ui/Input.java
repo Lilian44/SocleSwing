@@ -4,23 +4,26 @@ import javax.swing.JComponent;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-/** ReprÃ©sente un champ du formulaire
+/** Représente un champ du formulaire
  * @author RichardBONNAMY
  *
  */
 public abstract class Input {
 	
-	/** LibellÃ© associÃ© au champ de saisie */
+	/** Libellé associé au champ de saisie */
 	private String label;
 	
-	/** Nom du champ de saisie: doit Ãªtre unique */
+	/** Nom du champ de saisie: doit être unique */
 	private String name;
 	
 	/** Largeur en pixels du champ de saisie */
 	private int width;
+	
+	/** editable */
+	private boolean editable;
 
 	/** Constructeur
-	 * @param label libellÃ© du champ de saisie
+	 * @param label libellé du champ de saisie
 	 * @param name nom du champ de saisie
 	 */
 	public Input(String label, String name) {
@@ -98,5 +101,19 @@ public abstract class Input {
 	 */
 	public void setWidth(int width) {
 		this.width = width;
+	}
+
+	/** Getter
+	 * @return the editable
+	 */
+	boolean isEditable() {
+		return editable;
+	}
+
+	/** Setter
+	 * @param editable the editable to set
+	 */
+	void setEditable(boolean editable) {
+		this.editable = editable;
 	}
 }

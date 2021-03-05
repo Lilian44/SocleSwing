@@ -19,7 +19,7 @@ public class ComboBox extends Input {
 	private Selectable selectedItem;
 	
 	/** value */
-	private Long id;
+	private int id;
 	
 	/** Constructeur
 	 * @param label libellé
