@@ -50,7 +50,7 @@ public class VehiculeService extends MenuService {
 				+ "<tr class='bg-green'><td width='150px'>Ajouter une voiture</td><td width='150px'>liste des voitures</td></tr>"
 
 				+ "<tr>" + "  <td width='150px'><a class='btn-blue' href='ajouterVoiture()'> Nouvelle voiture </a></td>"
-				+ "</td>" + "  <td width='150px'><a class='btn-blue' href='listeVehicule()'> liste des clients</a></td>"
+				+ "</td>" + "  <td width='150px'><a class='btn-blue' href='listeVehicule()'> liste des voitures</a></td>"
 				+ "</tr>" + "</table>");
 
 	}
@@ -89,7 +89,6 @@ public class VehiculeService extends MenuService {
 		Form form = new Form();
 
 		form.addInput(new TextField("commentaire :", "commentaire"));
-		// On ajoute au formulaire 2 champs de type texte.
 		form.addInput(new TextField("Immatriculation:", "immatriculation"));
 		form.addInput(new TextField("Kilometrage:", "kilometrage"));
 		form.addInput(new TextField("Nombre de place:", "nbrPlaces"));
@@ -131,7 +130,7 @@ public class VehiculeService extends MenuService {
 
 		et.begin();
 		console.clear();
-//		console.print("<h1> ca marche là?" + id + "</h1>");
+
 
 		Integer newid = id.intValue();
 		Vehicule vehiculeModifier = em.find(Vehicule.class, newid);

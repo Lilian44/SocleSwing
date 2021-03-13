@@ -47,9 +47,8 @@ public class MaintenanceService extends MenuService {
 
 		form.addInput(new ComboBox("Liste des véhicules:", "vehicules", vehicules, vehicules.get(0)));
 
-		
 		MaintenanceValidator maintValidator = new MaintenanceValidator();
-		boolean valide = console.input("Demande d'informations", form, maintValidator);
+		boolean valide = console.input("Mise en mainteance d'un vehicule", form, maintValidator);
 
 		DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Vehicule v = form.getValue("vehicules");
@@ -62,22 +61,20 @@ public class MaintenanceService extends MenuService {
 
 			Maintenance maint = new Maintenance(dateDebut, dateFin, Double.valueOf(form.getValue("cout")), v);
 			v.setStatut("en maintenance");
-			console.print("<h1>"+v.getId()+" </h1>");
+			console.print("<h1>" + v.getId() + " </h1>");
 			allVehicule.modifMaintenance(v, "en Maintenance");
 			ChiffreAffaireDao solde = new ChiffreAffaireDao();
 			solde.solde(maint.getCoutMaintenance());
 			em.persist(maint);
 			et.commit();
-			
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		em.close();
 
-	
 	}
 
 }

@@ -1,6 +1,8 @@
 package fr.diginamic.menuServices;
 
 import java.awt.Color;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.swing.JFileChooser;
 
 import fr.diginamic.composants.MenuService;
 import fr.diginamic.composants.ui.DateField;
@@ -45,44 +48,27 @@ public class ClientService extends MenuService {
 	public ClientService() {
 	}
 
-//	public void update(Client client) {
-//		Client clientDB = findById(client.getId());
-//		clientDB.setNom(client.getNom());
-//	}
-//
-//	public void delete(Client client) {
-//		Client clietnDb = findById(client.getId());
-//		em.refresh(clietnDb);
-//
-//	}
-
 	@Override
 	public void traitement() {
 		// TODO Auto-generated method stub
 		console.clear();
-//		console.print("<a class='btn-blue' href='createClient()'> Nouveau client | </a>");
-//		console.print("<a class='btn-blue' href='afficherClients()'> liste des clients</a>");
 
 		console.print("<table cellspacing=0>"
-				+ "<tr class='bg-green'><td width='150px'>Nouveau client</td><td width='150px'>liste des clients</td></tr>"
+				+ "<tr class='bg-green'><td width='150px'>Nouveau client</td><td width='150px'>liste des clients</td><td width='150px'>Exporter la liste clients</td></tr>"
 
 				+ "<tr>" + "  <td width='150px'><a class='btn-blue' href='createClient()'> Nouveau client | </a></td>"
 				+ "</td>"
 				+ "  <td width='150px'><a class='btn-blue' href='afficherClients()'> liste des clients</a></td>"
+				+ "  <td width='150px'><a class='btn-blue' href='exportClient()'> exporter liste des clients</a></td>"
 				+ "</tr>" + "</table>");
 
 	}
 
 	public void afficherClients() {
 		console.clear();
-		EntityManager em = Application.entityManagerFactory.createEntityManager();
-		TypedQuery<Client> queryClients = em.createQuery("SELECT c FROM Client c", Client.class);
 
-		List<Client> clients = queryClients.getResultList();
-
-//		for (int i = 0; i < clients.size(); i++) {
-//			console.print(clients.get(i).toString(), Color.RED);
-//		}
+		ClientDao allClient = new ClientDao();
+		List<Client> clients = allClient.allClients();
 
 		String html = "<table cellspacing=0>"
 				+ "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Nom</td><td>Pr√©nom</td></tr>";
@@ -162,7 +148,6 @@ public class ClientService extends MenuService {
 
 		et.begin();
 		console.clear();
-//		console.print("<h1> ca marche l‡?" + id + "</h1>");
 
 		Integer newid = id.intValue();
 		Client clientModifier = em.find(Client.class, newid);
@@ -174,14 +159,16 @@ public class ClientService extends MenuService {
 		form.addInput(new TextField("libelle:", "libelle", clientModifier.getAdresse().getLibelle()));
 		form.addInput(new TextField("numero:", "numero", clientModifier.getAdresse().getNumeroRue()));
 		form.addInput(new TextField("mail:", "mail", clientModifier.getAdresse().getMail()));
-		form.addInput(new TextField("telephone:", "telephone"));
+		form.addInput(new TextField("telephone:", "telephone", "0"+String.valueOf(clientModifier.getAdresse().getTelephone())));
 		form.addInput(new TextField("nom:", "nom", clientModifier.getNom()));
 		form.addInput(new TextField("prenom:", "prenom", clientModifier.getPrenom()));
 		form.addInput(new DateField("date d'obtention du permis", "datePermis"));
 		form.addInput(new TextField("numero de permis:", "numeroPermis"));
 		form.addInput(new TextField("type:", "typePermis", clientModifier.getPermis().getType()));
 
-		boolean valide = console.input("modification client", form, null);
+		
+		ClientValidator validator = new ClientValidator();
+		boolean valide = console.input("modification client", form, validator);
 		DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 		Date datePermis;
@@ -216,13 +203,40 @@ public class ClientService extends MenuService {
 
 		et.begin();
 		console.clear();
-//		console.print("<h1> ca marche l‡?" + id + "</h1>");
 
 		Integer newid = id.intValue();
 		ClientDao delete = new ClientDao();
 		delete.deleteClients(newid);
 		et.commit();
 		em.close();
+	}
+
+	public void exportClient() {
+
+		FileWriter fileWriter;
+		try {
+
+			JFileChooser jfc = new JFileChooser();
+			jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			int ret = jfc.showOpenDialog(null);
+
+			ClientDao allClient = new ClientDao();
+			List<Client> clients = allClient.allClients();
+			fileWriter = new FileWriter(jfc.getSelectedFile() + "/Clients.csv");
+			fileWriter.append("Nom; Prenom ; code postal ; Ville ; Numero ; Libelle \n");
+			for (Client c : clients) {
+
+				fileWriter.append(c.getNom() + ";" + c.getPrenom() + ";" + c.getAdresse().getCodePostal() + ";"
+						+ c.getAdresse().getVille() + ";" + c.getAdresse().getNumeroRue() + ";"
+						+ c.getAdresse().getLibelle() + "\n");
+
+			}
+			fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
