@@ -14,7 +14,7 @@ public class Camion extends Vehicule {
 	public Camion() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

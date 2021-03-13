@@ -49,7 +49,7 @@ public abstract class Input {
 	/** Retourne la valeur saisie par l'utilisateur
 	 * @return String
 	 */
-	public abstract String getValue();
+	public abstract <T> T getValue();
 	
 	/**
 	 * @param value

@@ -2,6 +2,7 @@ package fr.diginamic.composants.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -55,8 +56,12 @@ public class ComboBox extends Input {
 	}
 
 	@Override
-	public String getValue() {
-		return Long.toString(id);
+	public Selectable getValue() {
+		Optional<Selectable> opt = selectables.stream().filter(s->s.getId().equals(this.id)).findFirst();
+		if (opt.isPresent()) {
+			return opt.get();
+		}
+		return null;
 	}
 	
 	@Override

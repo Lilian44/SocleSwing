@@ -28,8 +28,19 @@ public class Permis {
 	@JoinColumn(name = "id_client")
 	private Client client;
 
+	
+	
+	public Permis(String type, int numeroPermis, Date dateObtention) {
+		super();
+		this.type = type;
+		this.numeroPermis = numeroPermis;
+		this.dateObtention = dateObtention;
+	}
+
+
 	public Permis() {
 	}
+	
 
 	public int getId() {
 		return id;

@@ -23,9 +23,17 @@ public class Maintenance {
 
 	private double coutMaintenance;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "vehic_id")
 	private Vehicule vehicule;
+
+	public Maintenance(Date debutMaintenance, Date finMaintenance, double coutMaintenance, Vehicule vehicule) {
+		super();
+		this.debutMaintenance = debutMaintenance;
+		this.finMaintenance = finMaintenance;
+		this.coutMaintenance = coutMaintenance;
+		this.vehicule = vehicule;
+	}
 
 	public Maintenance() {
 	}
@@ -69,7 +77,5 @@ public class Maintenance {
 	public void setVehicule(Vehicule vehicule) {
 		this.vehicule = vehicule;
 	}
-	
-	
 
 }

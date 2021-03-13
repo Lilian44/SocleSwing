@@ -5,40 +5,48 @@ import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
-/** Champ de type texte pour saisir une information quelconque
+/**
+ * Champ de type texte pour saisir une information quelconque
+ * 
  * @author RichardBONNAMY
  *
  */
 public class TextField extends Input {
-	
+
 	/** Valeur saisie par l'utilisateur */
 	private String value;
 
-	/** Constructeur
-	 * @param name nom du champ de saisie
+	/**
+	 * Constructeur
+	 * 
+	 * @param name  nom du champ de saisie
 	 * @param label libellé du champ de saisie
 	 */
 	public TextField(String label, String name) {
 		super(label, name);
-		this.value="";
+		this.value = "";
 		setWidth(200);
 		setEditable(true);
 	}
-	
-	/** Constructeur
-	 * @param name nom du champ de saisie
-	 * @param label libellé du champ de saisie
+
+	/**
+	 * Constructeur
+	 * 
+	 * @param name     nom du champ de saisie
+	 * @param label    libellé du champ de saisie
 	 * @param editable indique si le champ est modifiable ou non
 	 */
 	public TextField(String label, String name, boolean editable) {
 		super(label, name);
-		this.value="";
+		this.value = "";
 		setWidth(200);
 		setEditable(editable);
 	}
-	
-	/** Constructeur
-	 * @param name nom du champ de saisie
+
+	/**
+	 * Constructeur
+	 * 
+	 * @param name  nom du champ de saisie
 	 * @param label libellé du champ de saisie
 	 * @param value valeur du champ de saisie
 	 */
@@ -46,12 +54,15 @@ public class TextField extends Input {
 		super(label, name);
 		this.value = value;
 		setWidth(200);
+		setEditable(true);
 	}
-	
-	/** Constructeur
-	 * @param name nom du champ de saisie
-	 * @param label libellé du champ de saisie
-	 * @param value valeur du champ de saisie
+
+	/**
+	 * Constructeur
+	 * 
+	 * @param name     nom du champ de saisie
+	 * @param label    libellé du champ de saisie
+	 * @param value    valeur du champ de saisie
 	 * @param editable indique si le champ est modifiable ou non
 	 */
 	public TextField(String label, String name, String value, boolean editable) {
@@ -78,10 +89,10 @@ public class TextField extends Input {
 	public String getValue() {
 		return value;
 	}
-	
+
 	@Override
 	public void setValue(JComponent component) {
-		this.value=((JTextField)component).getText();
+		this.value = ((JTextField) component).getText();
 	}
 
 	@Override
@@ -89,6 +100,4 @@ public class TextField extends Input {
 		return InputType.TEXTFIELD;
 	}
 
-
-	
 }

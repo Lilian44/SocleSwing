@@ -12,8 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import fr.diginamic.composants.ui.Selectable;
+
 @Entity
-public class Reservation {
+public class Reservation implements Selectable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,22 +31,33 @@ public class Reservation {
 
 	private String commentaire;
 
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = { CascadeType.MERGE })
 	@JoinColumn(name = "id_client")
 	private Client client;
 
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_facture")
 	private Facture facture;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "vehicule_id")
 	private Vehicule vehicule;
+
+	public Reservation(Date dateDebut, Date datefin, int kilometrageDebut, String commentaire, Client client,
+			Vehicule vehicule) {
+		super();
+		this.dateDebut = dateDebut;
+		this.datefin = datefin;
+		this.kilometrageDebut = kilometrageDebut;
+		this.commentaire = commentaire;
+		this.client = client;
+		this.vehicule = vehicule;
+	}
 
 	public Reservation() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -115,5 +128,7 @@ public class Reservation {
 	public void setVehicule(Vehicule vehicule) {
 		this.vehicule = vehicule;
 	}
+
+
 
 }

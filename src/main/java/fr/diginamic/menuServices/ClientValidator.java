@@ -1,13 +1,19 @@
 package fr.diginamic.menuServices;
 
+import java.util.List;
+
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.validator.FormValidator;
+import fr.diginamic.entites.Client;
+import fr.diginamicDaos.ClientDao;
 
 public class ClientValidator extends FormValidator {
 
 	@Override
 	public boolean validate(Form form) {
 		// TODO Auto-generated method stub
+		
+		
 		String nvVille = form.getValue("ville");
 		String nvCodePostal = form.getValue("codePostal");
 		String nvLibelle = form.getValue("libelle");
@@ -16,6 +22,9 @@ public class ClientValidator extends FormValidator {
 		String nvTelephone = form.getValue("telephone");
 		String nvNom = form.getValue("nom");
 		String nvPrenom = form.getValue("prenom");
+		
+		ClientDao checkmail = new ClientDao();
+		List<Client> mails = checkmail.checkMailExist(nvMail);
 
 		if (nvVille.trim().isEmpty()) {
 			console.alert("La ville est obligatoire !");
@@ -41,22 +50,21 @@ public class ClientValidator extends FormValidator {
 		} else if (nvPrenom.trim().isEmpty()) {
 			console.alert("Le prÃ©nom est obligatoire !");
 			return false;
-		} else if (nvTelephone.length() > 10
+		}
+		else if (nvTelephone.length() > 10
 				|| nvTelephone.length() < 10 || Integer.parseInt(nvTelephone.substring(1, 2)) < 1) {
 			console.alert("Le format du numéro de téléphone est incorrect  !");
 			return false;
 		} 
-			else if (nvMail != "") {
-//			Boolean mail = false;
-//			Boolean mail2 = false;
-//			for (int i = 0; i < nvMail.length(); i++) {
-//				if (nvMail.charAt(i) == "@") {
-//					
-//				}
-//			}
-//
-//			console.alert("Le format du mail est incorrect  !");
-//			return false;
+		else if (nvMail.trim().isEmpty()) {
+			console.alert("Le mail est obligatoire !");
+			return false;
+		}else if (nvMail.matches(".+@.+\\.[a-z]+")==false) {
+			console.alert("Format du mail incorrect !");
+			return false;
+		}else if (mails.size()==0) {
+			console.alert("Cet Email existe est déja enregistré !");
+			return false;
 		}
 
 		return true;

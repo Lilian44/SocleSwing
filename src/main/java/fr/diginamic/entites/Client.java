@@ -25,15 +25,24 @@ public class Client implements Selectable {
 	@JoinColumn(name = "id_adresse")
 	private Adresse adresse;
 
-	@OneToOne(cascade = { CascadeType.ALL })
+//	@OneToOne(cascade = {CascadeType.ALL})
+//	@JoinColumn(name = "id_permis")
+//	private Permis permis;
+
+	@OneToOne(cascade = { CascadeType.MERGE })
 	@JoinColumn(name = "id_reservation")
 	private Reservation reservation;
 
-	public Client(String nom, String prenom, Adresse adresse) {
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "id_permis")
+	private Permis permis;
+
+	public Client(String nom, String prenom, Adresse adresse, Permis permis) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
+		this.permis = permis;
 
 	}
 
@@ -83,9 +92,17 @@ public class Client implements Selectable {
 		this.reservation = reservation;
 	}
 
+	public Permis getPermis() {
+		return permis;
+	}
+
+	public void setPermis(Permis permis) {
+		this.permis = permis;
+	}
+
 	@Override
 	public String toString() {
-		return "  nom=" + nom + " prenom=" + prenom ;
+		return "  nom=" + nom + " prenom=" + prenom;
 	}
 
 }

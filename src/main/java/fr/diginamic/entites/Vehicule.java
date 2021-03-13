@@ -11,11 +11,14 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import fr.diginamic.composants.ui.Selectable;
+
 import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Vehicule {
+public class Vehicule implements Selectable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,12 +42,13 @@ public class Vehicule {
 	@OneToMany(mappedBy = "vehicule")
 	private List<Maintenance> maintenances = new ArrayList<>();
 
-	public Vehicule(String immatriculation, int kilometrage, String commentaire) {
+	public Vehicule(String immatriculation, int kilometrage, String commentaire,String modele) {
 		super();
 
 		this.immatriculation = immatriculation;
 		this.kilometrage = kilometrage;
 		this.commentaire = commentaire;
+		this.modele=modele;
 
 	}
 
@@ -56,7 +60,7 @@ public class Vehicule {
 		this.modele = modele;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

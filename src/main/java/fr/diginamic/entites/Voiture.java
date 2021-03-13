@@ -21,10 +21,17 @@ public class Voiture extends Vehicule {
 	@JoinColumn(name = "type_id")
 	private Type type;
 
+	public Voiture(String immatriculation, int kilometrage, String commentaire, String modele, int nbrePlace,
+			Type type) {
+		super(immatriculation, kilometrage, commentaire, modele);
+		this.nbrePlace = nbrePlace;
+		this.type = type;
+	}
+
 	public Voiture() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

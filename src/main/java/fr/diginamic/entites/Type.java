@@ -9,9 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import fr.diginamic.composants.ui.Selectable;
+
 @Entity
 
-public class Type {
+public class Type implements Selectable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -35,7 +37,7 @@ public class Type {
 		this.caution = caution;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -65,6 +67,12 @@ public class Type {
 
 	public void setCaution(double caution) {
 		this.caution = caution;
+	}
+
+	@Override
+	public String toString() {
+		return "Type [id=" + id + ", nomType=" + nomType + ", montantJour=" + montantJour + ", caution=" + caution
+				+ ", voitures=" + voitures + "]";
 	}
 
 }

@@ -7,17 +7,18 @@ import javax.persistence.TypedQuery;
 
 import fr.diginamic.entites.Application;
 import fr.diginamic.entites.Client;
-import fr.diginamic.entites.Reservation;
+import fr.diginamic.entites.Type;
 
-public class ReservationDao {
-	
-	
-	public List<Reservation> allReservation() {
+public class TypeDao {
+
+	public List<Type> allTypes() {
 
 		EntityManager em = Application.entityManagerFactory.createEntityManager();
-		TypedQuery<Reservation> queryReservation = em.createQuery("SELECT r FROM Reservation r", Reservation.class);
+		TypedQuery<Type> queryTypes = em.createQuery("SELECT t FROM Type t", Type.class);
 
-		return queryReservation.getResultList();
+		return queryTypes.getResultList();
 	}
+
+
 
 }

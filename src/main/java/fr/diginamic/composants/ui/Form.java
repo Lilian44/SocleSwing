@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import fr.diginamic.composants.error.ErrorManager;
-import fr.diginamic.composants.validator.FormValidator;
 
 /** Formulaire
  * @author RichardBONNAMY
@@ -17,7 +16,10 @@ public class Form implements Iterable<Input> {
 	/** Liste des champs de saisie */
 	private List<Input> inputs = new ArrayList<>();
 	
-	/** Retourne un champ de saisie Ã  partir de son nom
+	/** validated */
+	private boolean validated;
+	
+	/** Retourne un champ de saisie à partir de son nom
 	 * @param name nom du champ
 	 * @return {@link Input}
 	 */
@@ -37,16 +39,22 @@ public class Form implements Iterable<Input> {
 			ErrorManager.manage("Il est interdit d'ajouter un champ null dans le formulaire.");
 		}
 		else if (inputs.contains(input)) {
-			ErrorManager.manage("Il existe dÃ©jÃ  un champ de saisie avec le nom "+input.getName()+" dans le formulaire.");
+			ErrorManager.manage("Il existe déjà un champ de saisie avec le nom "+input.getName()+" dans le formulaire.");
 		}
 		inputs.add(input);
 	}
 
-	/** Retourne la valeur saisie pour un champ de saisie donnÃ©
+	/** Retourne la valeur saisie pour un champ de saisie donné
 	 * @param name nom du champ de saisie
 	 * @return String
 	 */
-	public String getValue(String name) {
+	public <T> T getValue(String name) {
+//		if (!isValidated()) {
+//			ErrorManager.manage("Vous devez d'abord afficher et valider le formulaire (console.input) avant de récupérer les résultats.");
+//		}
+		if(getInput(name)==null) {
+			ErrorManager.manage("Le champ de formulaire "+name+"n'existe pas!");
+		}
 		return getInput(name).getValue();
 	}
 
@@ -74,5 +82,19 @@ public class Form implements Iterable<Input> {
 	 */
 	public void setInputs(List<Input> inputs) {
 		this.inputs = inputs;
+	}
+
+	/** Getter
+	 * @return the validated
+	 */
+	public boolean isValidated() {
+		return validated;
+	}
+
+	/** Setter
+	 * @param validated the validated to set
+	 */
+	public void setValidated(boolean validated) {
+		this.validated = validated;
 	}
 }
